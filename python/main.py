@@ -25,10 +25,10 @@ pattern = [
     [63, 31, 55, 23, 61, 29, 53, 21]
 ]
 c = 0  # 累计帧数
-timeF = 2  # 隔2帧截一次图，数字越小，播放越细腻(1~99999)
+timeF = 2  # 隔2帧截一次图，数字越小，播放越细腻(1~99)
 video = cv2.VideoCapture(r"./assets/BadApple.mp4")
 
-UDP_IP = "192.168.30.104"  # 单片机的ip地址
+UDP_IP = "192.168.30.104"  # 单片机的ip地址（自行修改单片机有显示地址）
 UDP_PORT = 4210  # 单片机的UDP端口
 
 print("UDP target IP: %s" % UDP_IP)
