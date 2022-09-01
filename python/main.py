@@ -52,8 +52,8 @@ while return_value:  # 循环读取视频帧
             resize_h = int(h / min_scale)
             resize_w = int(w / min_scale)  # 计算显示尺寸
             frame = cv2.resize(frame, (resize_w, resize_h))  # 调整尺寸
-            # frame = binary_image(frame)
-            frame = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)  # 把输入图像灰度化
+            # frame = binary_image(frame)  # 调用opencv处理图像（如果是简单的双色图像可以不需要）
+            frame = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)  # 把输入图像灰度化（如果启用了上面的代码的话这句不要）
             cut_w = int((resize_w - 128) / 2)
             cut_h = int((resize_h - 64) / 2)
             # 截取（128 * 64）的内容，如内容不是128*64自行+-1
@@ -73,11 +73,12 @@ while return_value:  # 循环读取视频帧
             for row in range(0, 64):
                 for col in range(0, 128):
                     b -= 1
-
+                    
                     # 二值化
                     if cut_frame[row][col] > 117:
                         pix += 1 << b
 
+                    # 以下图像处理选择显示最适合的即可（抖动模仿显示不同深度的颜色，具体原理可以参照 https://en.wikipedia.org/wiki/Dither）
                     # # 随机抖动
                     # if random.randint(-50, 50) + cut_frame[row][col] > 117:
                     #     pix += 1 << b
@@ -86,7 +87,7 @@ while return_value:  # 循环读取视频帧
                     # if cut_frame[row][col] / 4.0 > pattern[row % 8][col % 8]:
                     #     pix += 1 << b
 
-                    # # 误差扩散 Floyd_Steinberg
+                    # # 误差扩散 Floyd_Steinberg（非常非常非常非常慢，没有具体验证正确与否）
                     # old_c = cut_frame[row][col]
                     # new_c = old_c > 117 if 225 else 0
                     # cut_frame[row][col] = new_c
@@ -117,7 +118,7 @@ while return_value:  # 循环读取视频帧
             if time_wait > 0:
                 time.sleep(time_wait)
             else:
-                # 这个long如果有很多说明电脑性能不够，建议把timeF改大点，不然播放会有卡顿
+                # 这个log如果有很多说明电脑性能不够，建议把timeF改大点，不然播放会有延迟
                 print('please change timeF bigger')
 
             # 更新最后一帧时间
