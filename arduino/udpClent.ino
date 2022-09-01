@@ -4,9 +4,9 @@
 
 SSD1306Wire display(0x3c, SDA, SCL); 
 
-// 网络用户名和密码
-const char* ssid = "YSHZ-PC";
-const char* password = "Yshz2021";
+// 网络用户名和密码 自行修改
+const char* ssid = "wifi 账号";
+const char* password = "wifi 密码";
 
 WiFiUDP Udp;
 unsigned int localUdpPort = 4210;  // udp的监听点
