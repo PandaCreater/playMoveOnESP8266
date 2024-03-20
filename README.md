@@ -14,3 +14,6 @@ https://github.com/ThingPulse/esp8266-oled-ssd1306
 ### python
 需安装openCV的第三方<br />
 <code>pip3 install opencv-python</code>
+
+### 新增矩阵屏版本
+须用esp32
